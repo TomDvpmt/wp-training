@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html {{ site.language_attributes }}>
+	<head>
+		{{function("wp_head")}}
+		<meta charset="{{site.charset}}">
+		<title>{{wp_title ? wp_title ~ '|' ~ site.name : site.name}}</title>
+		{{function('wp_head')}}
+	</head>
+	<body>
+		{% include "parts/header.twig" %}
+		{% block content '' %}
+		{% include "parts/footer.twig" %}
+		{{function('wp_footer')}}
+	</body>
+</html>
