@@ -1,0 +1,25 @@
+{% extends "base.twig" %}
+
+{% block content %}
+	<main>
+		<section class="front-section">
+			<div class="front-section__title">
+				<h2 class="front-section__title__main">Les produits</h2>
+				<p class="front-section__title__tagline">Coups de cœurs</p>
+			</div>
+			<div class="front-section__content">
+				<div class="products">
+					{% for product in products %}
+						<article class="product">
+							<a href="{{product.link}}">
+								<h2 class="product__title">{{product.title}}</h2>
+								<img src="{{product.thumbnail.src}}" alt="{{product.title}}" class="product__thumbnail">
+							</a>
+						</article>
+					{% endfor %}
+				</div>
+			</div>
+		</section>
+	</main>
+
+{% endblock %}
