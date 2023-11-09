@@ -12,7 +12,10 @@
 					{% for product in products %}
 						<article class="product">
 							<a href="{{product.link}}">
-								<h2 class="product__title">{{product.title}}</h2>
+								<div class="product__heading">
+									<h2 class="product__heading__title">{{product.title}}</h2>
+									<h3 class="product__heading__brand">{{get_term(product.meta('marque'))}}</h3>
+								</div>
 								<img src="{{product.thumbnail.src}}" alt="{{product.title}}" class="product__thumbnail">
 							</a>
 						</article>

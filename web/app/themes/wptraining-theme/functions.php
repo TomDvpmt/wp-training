@@ -17,32 +17,53 @@ function mytheme_init()
             'name' => 'Produits',
             'singular_name' => 'Produit',
             'add_new' => 'Ajouter un produit',
-            'add_new_item' => 'Ajouter un produit'
+            'add_new_item' => 'Ajouter un produit',
+            'new_item' => 'Nouveau produit',
+            'edit_item' => 'Modifier le produit',
+            'view_item' => 'Voir le produit',
+            'view_items' => 'Voir les produits',
+            'all_items' => 'Tous les produits',
+            'archives' => 'Liste des produits',
+            'item_published' => 'Produit publié',
+            'item_published_privately' => 'Produit publié en mode privé',
+            'item_reverted_to_draft' => 'Produit basculé en mode brouillon',
+            'item_trashed' => 'Produit mis à la corbeille',
+            'item_scheduled' => 'Produit planifié pour une publication',
+            'item_updated' => 'Produit mis à jour',
+            'item_link' => 'Lien du produit'
         ],
         'public' => true,
-        'supports' => ['title', 'editor', 'thumbnail']
+        'supports' => ['title', 'thumbnail']
     ]);
 
     register_taxonomy('brand', 'product', [
         'public' => true,
         'show_admin_column' => true,
-        'show_in_quick_edit' => true,
         'meta_box_cb' => false,
+        'show_in_quick_edit' => false,
+        'show_in_rest' => true,
+        'publicly_queryable' => true,
         'hierarchical' => true,
+        'query_var' => true,
         'labels' => [
             'name' => 'Marques',
             'singular_name' => 'Marque',
-            'search_items' => 'Chercher des marques',
-            'popular_items' => 'Marques populaires',
-            'all_items' => 'Toutes les marques',
-            'edit_item' => 'Éditer la marque',
-            'view_item' => 'Voir la marque',
-            'update_item' => 'Mettre à jour la marque',
             'add_new_item' => 'Ajouter une marque',
             'new_item_name' => 'Nouveau nom de marque',
-            'separate_items_with_commas' => 'Séparez les marques avec des virgules',
-            'choose_from_most_used' => 'Choisissez parmi les plus utilisées',
-            'not_found' => 'Aucune marque trouvée.',
+        ]
+    ]);
+
+    register_taxonomy('product-category', 'product', [
+        'public' => true,
+        'show_admin_column' => true,
+        'show_in_quick_edit' => true,
+        'hierarchical' => true,
+        'meta_box_cb' => false,
+        'labels' => [
+            'name' => 'Catégories',
+            'singular_name' => 'Catégorie',
+            'add_new_item' => 'Ajouter une catégorie de produits',
+            'new_item_name' => 'Nouvelle catégorie de produits',
         ]
     ]);
 }

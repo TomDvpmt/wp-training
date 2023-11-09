@@ -6,4 +6,4 @@ $context = Timber::context();
 
 dump($context);
 
-Timber::render('pages/product.twig', $context);
+Timber::render('pages/single-product.twig', $context);
