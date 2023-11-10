@@ -3,19 +3,23 @@
 {% block content %}
 	<main>
 		<section class="product__header">
-			<h1 class="product__header__title">{{post.title}}</h1>
-			<p class="product__header__baseline">{{get_term(post.meta('marque'))}}</p>
-			<div class="product__header__short-description">{{post.meta('short-description')}}</div>
-			{% if post.meta('design') %}
-				<div class="product__header__design">
-					<span class="product__header__design__label">Design :
-					</span>
-					<span class="product__header__design__content">{{post.meta('design')}}.</span>
-				</div>
-			{% endif %}
-			<button>Obtenir plus d'informations</button>
+			<div class="product__header__infos">
+				<h1 class="product__header__infos__title">{{post.title}}</h1>
+				<p class="product__header__infos__baseline">{{get_term(post.meta('marque'))}}</p>
+				<div class="product__header__infos__short-description">{{post.meta('short-description')}}</div>
+				{% if post.meta('design') %}
+					<div class="product__header__infos__design">
+						<span class="product__header__infos__design__label">Design :
+						</span>
+						<span class="product__header__infos__design__content">{{post.meta('design')}}.</span>
+					</div>
+				{% endif %}
+				<button>Obtenir plus d'informations</button>
+			</div>
+			<div class="product__header__carousel"></div>
 		</section>
-		<section class="product__description textured">{{post.meta('description')|wpautop}}</section>
+		<section class="product__description">{{post.meta('description')|wpautop}}</section>
+		<section class="product__suggestions"></section>
 	</main>
 
 {% endblock %}

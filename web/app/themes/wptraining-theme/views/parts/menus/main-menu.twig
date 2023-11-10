@@ -1,12 +1,18 @@
 <nav>
-	<ul class="nav">
-		{% for item in main_pages_menu.items %}
+	<ul class="nav main-menu">
+		{% set items = main_pages_menu.items %}
+		{% for key, item in items %}
 			<li class="nav-item {{item.class}}">
-				<a href="{{item.link}}" class="nav-link" {{item.is_target_blank ? 'target="_blank"'}}>{{item.title}}</a>
+				<a class="nav-item__link" href="{{item.link}}" {{item.is_target_blank ? 'target="_blank"'}}>
+					<span class="nav-item__link__label">{{item.title}}</span>
+				</a>
 				{% if item.title == "Nos produits" %}
 					{% include "parts/menus/product-categories-menu.twig" %}
 				{% endif %}
 			</li>
+			{% if key != items|length - 1 %}
+				<span class="nav-item__separator">&#9670;</span>
+			{% endif %}
 		{% endfor %}
 	</ul>
 </nav>

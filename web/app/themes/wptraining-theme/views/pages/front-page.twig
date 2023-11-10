@@ -13,8 +13,8 @@
 						<article class="product">
 							<a href="{{product.link}}">
 								<div class="product__heading">
-									<h2 class="product__heading__title">{{product.title}}</h2>
-									<h3 class="product__heading__brand">{{get_term(product.meta('marque'))}}</h3>
+									<h3 class="product__heading__title">{{product.title}}</h3>
+									<span class="product__heading__brand">{{get_term(product.meta('marque'))}}</span>
 								</div>
 								<img src="{{product.thumbnail.src}}" alt="{{product.title}}" class="product__thumbnail">
 							</a>

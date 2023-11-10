@@ -1,6 +1,9 @@
 <header class="header">
-	<a href="{{site.home_url}}">
-		<img src="#" alt="Logo Primo">
-	</a>
-	{% include "parts/menus/main-menu.twig" %}
+	<div class="header__main">
+		<a class="header__main__logo" href="{{site.home_url}}" title="Primo">
+			<img src="https://www.primo-design.fr/wp-content/themes/primo/proto/app/assets/media/images/c-logo--primo.svg" alt="Primo logo">
+		</a>
+		{% include "parts/menus/main-menu.twig" %}
+	</div>
+	<div class="header__breadcrumb">Breadcrumb</div>
 </header>

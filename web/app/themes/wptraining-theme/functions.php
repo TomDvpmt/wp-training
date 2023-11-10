@@ -92,9 +92,18 @@ function mytheme_remove_dashboard_widgets()
     remove_meta_box('dashboard_primary', 'dashboard', 'side');
 }
 
+function mytheme_add_file_types_to_upload($filetypes)
+{
+    $new_filetypes = array();
+    $new_filetypes['svg'] = 'image/svg+xml';
+    $filetypes = array_merge($filetypes, $new_filetypes);
+    return $filetypes;
+}
+
 add_action('init', 'mytheme_init');
 add_action('wp_dashboard_setup', 'mytheme_remove_dashboard_widgets');
 add_action('wp_enqueue_scripts', 'mytheme_enqueue_scripts');
 add_action('after_setup_theme', 'mytheme_supports');
 add_action('after_setup_theme', 'mytheme_register_menus');
 add_filter('timber/context', 'mytheme_add_to_context');
+add_filter('upload_mimes', 'mytheme_add_file_types_to_upload');
