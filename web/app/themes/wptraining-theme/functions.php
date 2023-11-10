@@ -9,6 +9,11 @@ function mytheme_supports()
     add_theme_support('menus');
 }
 
+function mytheme_enqueue_scripts()
+{
+    wp_enqueue_style('style', get_stylesheet_uri());
+}
+
 function mytheme_init()
 {
     register_post_type('product', [
@@ -70,16 +75,26 @@ function mytheme_init()
 
 function mytheme_register_menus()
 {
-    register_nav_menu('navbar-menu', 'Menu principal (header)');
+    register_nav_menu('navbar-menu', 'Navigation principale (header)');
+    register_nav_menu('navbar-products-submenu', 'Sous-menu navigation principale (header)');
 }
 
 function mytheme_add_to_context($context)
 {
-    $context['navbar_menu'] = Timber::get_menu('navbar-menu');
+    $context['main_pages_menu'] = Timber::get_menu('Pages principales');
+    $context['product_categories_menu'] = Timber::get_menu('Navigation catégories de produits');
     return $context;
 }
 
+function mytheme_remove_dashboard_widgets()
+{
+    remove_meta_box('dashboard_quick_press', 'dashboard', 'side');
+    remove_meta_box('dashboard_primary', 'dashboard', 'side');
+}
+
 add_action('init', 'mytheme_init');
+add_action('wp_dashboard_setup', 'mytheme_remove_dashboard_widgets');
+add_action('wp_enqueue_scripts', 'mytheme_enqueue_scripts');
 add_action('after_setup_theme', 'mytheme_supports');
 add_action('after_setup_theme', 'mytheme_register_menus');
 add_filter('timber/context', 'mytheme_add_to_context');
