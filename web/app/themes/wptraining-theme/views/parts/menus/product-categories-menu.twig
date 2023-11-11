@@ -1,9 +1,18 @@
-<nav class="product-categories-menu">
-	<div class="product-categories-menu__image"></div>
-	<ul class="product-categories-menu__list">
+<nav class="nav product-categories-menu">
+	<div class="product-categories-menu__image-container">
+		<img class="product-categories-menu__image" src="http://localhost:4300/app/uploads/2023/11/bureaux.jpg" alt="">
+	</div>
+	<ul>
 		{% for item in product_categories_menu.items %}
 			<li class="nav-item {{item.class}}">
-				<a href="{{item.url}}" class="nav-link" {{item.is_target_blank ? 'target="_blank"'}}>{{item.title}}</a>
+				<a class="nav-link nav-link--product" href="{{item.url}}" target="{{item.target}}" data-image="{{item.image_src}}">{{item.title}}</a>
+			</li>
+		{% endfor %}
+	</ul>
+	<ul class="brands-link-menu">
+		{% for item in brands_menu.items %}
+			<li class="nav-item {{item.class}}">
+				<a class="nav-link nav-link--brand" href="{{item.url}}" target="{{item.target}}">{{item.title}}</a>
 			</li>
 		{% endfor %}
 	</ul>

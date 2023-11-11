@@ -1,0 +1,19 @@
+.has-submenu {
+    nav {
+        position: absolute;
+        top: $header-height;
+        left: 0;
+        right: 0;
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 10;
+    }
+
+    &:hover {
+        nav {
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+}

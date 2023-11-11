@@ -14,35 +14,22 @@
         display: flex;
         align-items: center;
         gap: 2rem;
-        height: 6rem;
+        height: $header-height;
+    }
 
-        .nav-item {
-            position: relative;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            text-transform: uppercase;
+    .product-categories-menu {
+        background-color: #fff;
+        display: flex;
+        gap: 1rem;
 
-            &__link::before {
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                height: 0px;
-                content: "";
-                background-color: transparent;
-                transition: all 0.2s cubic-bezier(0.7, 0, 0.175, 1);
-            }
+        &__image-container {
+            max-width: 300px;
+        }
 
-            &__link:hover::before {
-                height: 3px;
-                background-color: $color-primary;
-            }
-
-            &__separator {
-                color: $color-primary;
-                font-size: 0.375rem;
-            }
+        &__image {
+            width: 100%;
+            object-fit: cover;
+            object-position: center;
         }
     }
 }

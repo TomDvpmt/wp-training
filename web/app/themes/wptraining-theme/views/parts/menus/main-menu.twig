@@ -2,11 +2,11 @@
 	<ul class="nav main-menu">
 		{% set items = main_pages_menu.items %}
 		{% for key, item in items %}
-			<li class="nav-item {{item.class}}">
+			<li class="nav-item nav-item--main {{item.class}}{{item.title == 'Nos produits' ? ' has-submenu' : ''}}">
 				<a class="nav-item__link" href="{{item.link}}" {{item.is_target_blank ? 'target="_blank"'}}>
 					<span class="nav-item__link__label">{{item.title}}</span>
 				</a>
-				{% if item.title == "Nos produits" %}
+				{% if item.title == 'Nos produits' %}
 					{% include "parts/menus/product-categories-menu.twig" %}
 				{% endif %}
 			</li>

@@ -9,9 +9,24 @@ function mytheme_supports()
     add_theme_support('menus');
 }
 
-function mytheme_enqueue_scripts()
+function mytheme_enqueue_assets()
 {
+    wp_register_script('navbar', get_template_directory_uri() . '/assets/js/navbar.js', [], null, [
+        'strategy' => 'defer'
+    ]);
+
     wp_enqueue_style('style', get_stylesheet_uri());
+    wp_enqueue_script('navbar');
+
+    $translation_array = ['templateUrl' => get_stylesheet_directory_uri()];
+    wp_localize_script('navbar', 'navbar_script', $translation_array);
+}
+
+function add_defer_attribute($tag, $handle)
+{
+    if ('navbar' !== $handle)
+        return $tag;
+    return str_replace(' src', ' defer src', $tag);
 }
 
 function mytheme_init()
@@ -76,13 +91,20 @@ function mytheme_init()
 function mytheme_register_menus()
 {
     register_nav_menu('navbar-menu', 'Navigation principale (header)');
-    register_nav_menu('navbar-products-submenu', 'Sous-menu navigation principale (header)');
+    register_nav_menu('navbar-products-submenu', 'Sous-menu navigation principale (header) - partie gauche');
+    register_nav_menu('navbar-brands-submenu', 'Sous-menu navigation principale (header) - partie droite');
 }
 
 function mytheme_add_to_context($context)
 {
-    $context['main_pages_menu'] = Timber::get_menu('Pages principales');
-    $context['product_categories_menu'] = Timber::get_menu('Navigation catégories de produits');
+    $context['main_pages_menu'] = Timber::get_menu('navbar-menu');
+    $categories = Timber::get_menu('navbar-products-submenu');
+    foreach ($categories->items as $item) {
+        $image_id = get_term_meta($item->object_id, 'image_pour_categorie_de_produits', true);
+        $item->image_src = $image_id ? wp_get_attachment_image_src($image_id, 'original')[0] : "";
+    }
+    $context['product_categories_menu'] = $categories;
+    $context['brands_menu'] = Timber::get_menu('navbar-brands-submenu');
     return $context;
 }
 
@@ -102,8 +124,11 @@ function mytheme_add_file_types_to_upload($filetypes)
 
 add_action('init', 'mytheme_init');
 add_action('wp_dashboard_setup', 'mytheme_remove_dashboard_widgets');
-add_action('wp_enqueue_scripts', 'mytheme_enqueue_scripts');
+add_action('wp_enqueue_scripts', 'mytheme_enqueue_assets');
 add_action('after_setup_theme', 'mytheme_supports');
 add_action('after_setup_theme', 'mytheme_register_menus');
+
+add_filter('script_loader_tag', 'add_defer_attribute', 10, 2);
 add_filter('timber/context', 'mytheme_add_to_context');
 add_filter('upload_mimes', 'mytheme_add_file_types_to_upload');
+// add_filter('show_admin_bar', '__return_false');
